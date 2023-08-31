@@ -18,7 +18,7 @@ import java.util.Map;
 @ControllerAdvice("com.blog.gxyblog.controller")
 public class GlobExceptionHandler {
 
-    //业务异常全局处理
+    //业务异常全局处理方法
     @ExceptionHandler(BizException.class)
     public ModelAndView bizExceptionHandler(BizException ex) {
         log.error("异常code：{},异常msg：{}", ex.getCode(), ex.getMessage());
