@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.gxyblog.mapper.ArticleMapper">
+    <select id="listArchives" resultType="com.blog.gxyblog.dto.Archives">
+        select year(create_time) as year, month(create_time) as month, count(*) count
+        from t_article
+        group by year desc, month
+    </select>
+
+    <select id="listArticlesByArchives" resultType="com.blog.gxyblog.Article">
+        select *
+        from t_article t1
+        <if test="#{archives.year} != null and #{archives.month }!= null">
+            year(t1.create_time) = #{archives.year} and month(t1.create_time) = {archives.month }
+        </if>
+    </select>
+
+</mapper>
